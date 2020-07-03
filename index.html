@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            AnalogAndDigitalClock
+        </title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="clock">
+            <div class="hour">
+                <div class="hr"></div>
+            </div>
+            <div class="minute">
+                <div class="mn"></div>
+            </div>
+            <div class="second">
+                <div class="sc"></div>
+            </div>
+        </div>
+        <div class="digital">
+            <div id="hr"></div>:
+            <div id="mn"></div>:
+            <div id="sc"></div>
+            <div class="ampm"></div>
+        </div>
+    </body>
+    <script>
+        const hr = document.querySelector('.hr')
+        const mn = document.querySelector('.mn')
+        const sc = document.querySelector('.sc')
+
+        const h = document.querySelector('#hr')
+        const m = document.querySelector('#mn')
+        const s = document.querySelector('#sc')
+        const ampm = document.querySelector('.ampm')
+
+        setInterval(()=>{
+            let day = new Date()
+            let hh = day.getHours()*30
+            let mm = day.getMinutes()*6
+            let ss = day.getSeconds()*6
+
+            hr.style.transform = `rotateZ(${hh+(mm/12)}deg)`
+            mn.style.transform = `rotateZ(${mm}deg)`
+            sc.style.transform = `rotateZ(${ss}deg)`
+
+            let d = new Date()
+            if(d.getHours()>12)
+            {h.innerHTML = d.getHours()-12;}
+            if(d.getHours()<=12)
+            {h.innerHTML = d.getHours();
+            }
+            m.textContent = d.getMinutes();
+            s.textContent = d.getSeconds();
+            if(d.getHours()<12)
+            {ampm.textContent = 'AM'}
+            if(d.getHours()>=12)
+            {ampm.textContent = 'PM'}
+        }, 1000)
+
+    </script>
+</html>
